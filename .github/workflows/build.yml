@@ -10,25 +10,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@v2
         with:
           channel: stable
 
-      - name: Flutter Version
-        run: flutter --version
+      - name: Create Flutter project structure
+        run: |
+          flutter create temp_app
+          rsync -av lib/ temp_app/lib/
+          cp pubspec.yaml temp_app/pubspec.yaml
+          cd temp_app
+          flutter pub get
+          flutter build apk --release
 
-      - name: Install Dependencies
-        run: flutter pub get
-
-      - name: Build Release APK
-        run: flutter build apk --release
-
-      - name: Upload APK Artifact
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
           name: musify-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+          path: temp_app/build/app/outputs/flutter-apk/app-release.apk
