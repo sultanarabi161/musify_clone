@@ -1,5 +1,5 @@
 name: musify_clone
-description: Open source YouTube audio streaming app
+description: Simple YouTube Audio Player
 publish_to: "none"
 
 environment:
@@ -8,13 +8,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  youtube_explode_dart: ^2.0.0
-  just_audio: ^0.9.36
-  audio_service: ^0.18.12
-
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
+  youtube_explode_dart: ^2.5.3
+  just_audio: ^0.9.46
 
 flutter:
   uses-material-design: true
